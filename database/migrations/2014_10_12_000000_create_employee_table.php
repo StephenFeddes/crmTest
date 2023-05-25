@@ -17,11 +17,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('username')->unique();
             $table->string('department_name');
-<<<<<<< HEAD
             $table->string('email_address')->unique();
-=======
-            $table->string('email')->unique();
->>>>>>> be82b6f0b6878c6a4687914c8ec7a00914b9f96f
             $table->string('phone_number')->unique();
             $table->string('password');
             $table->rememberToken();

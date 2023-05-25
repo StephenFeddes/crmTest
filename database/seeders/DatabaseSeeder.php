@@ -13,14 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::create([
-            'first_name'=>'Stephen',
-            'last_name'=>'Feddes',
-            "username"=>'steve',
-            'department_name'=>'Support',
-            'email'=>'stevepfeddes@gmail.com',
-            'phone_number'=>'708-964-5875',
-            'password'=>Hash::make('secret')
-        ]);
+        // \App\Models\User::create([
+        //     'first_name'=>'Stephen',
+        //     'last_name'=>'Feddes',
+        //     "username"=>'steve',
+        //     'department_name'=>'Support',
+        //     'email'=>'stevepfeddes@gmail.com',
+        //     'phone_number'=>'708-964-5875',
+        //     'password'=>Hash::make('secret')
+        // ]);
     }
 }

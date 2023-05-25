@@ -26,15 +26,9 @@ class User extends Authenticatable
         'last_name',
         'username',
         'department_name',
-<<<<<<< HEAD
         'email_address',
         'phone_number',
         'password'
-=======
-        'email',
-        'phone_number',
-        'password',
->>>>>>> be82b6f0b6878c6a4687914c8ec7a00914b9f96f
     ];
 
     /**
