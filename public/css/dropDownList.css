@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --white: rgb(255, 255, 255);
+    --light-grey: rgb(230, 230, 230);
+    --grey: rgb(200, 200, 200);
+  }
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: green;
+}
+
+.employee-dropdown-list {
+    width: 300px;
+    margin: 130px auto 0;
+}
+
+.employee-dropdown-list .select-btn, .employee-dropdown-list .options li {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+}
+
+.employee-dropdown-list .select-btn i {
+    font-size: 30px;
+    transition: transform 0.3s linear;
+}
+
+.employee-dropdown-list.active .select-btn i {
+    transform: rotate(-180deg);
+}
+
+.employee-dropdown-list .select-btn {
+    height: 65px;
+    padding: 0 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    background: var(--white);
+    justify-content: space-between;
+}
+
+.employee-dropdown-list .content {
+    display: none;
+    margin-top: 15px;
+    padding: 20px;
+    border-radius: 5px;
+    background: var(--white);
+}
+
+.employee-dropdown-list.active .content {
+    display: block;
+}
+
+.employee-dropdown-list .content .search {
+    position: relative;
+}
+
+.content .options {
+    margin-top: 10px;
+}
+
+.employee-dropdown-list .search i {
+    left: 15px;
+    color: var(--light-grey);
+    font-size: 20px;
+    line-height: 50px;
+    position: absolute;
+}
+
+.employee-dropdown-list .search input {
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 0 15px 0 40px;
+    border: 1px solid var(--grey);
+}
+
+.employee-dropdown-list .content .options {
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 7px;
+}
+
+.employee-dropdown-list .options::-webkit-scrollbar {
+    width: 7px;
+}
+
+.employee-dropdown-list .options::-webkit-scrollbar-track {
+    background: var(--light-grey);
+    border-radius: 25px;
+}
+
+.employee-dropdown-list .options::-webkit-scrollbar-thumb {
+    background: var(--grey);
+    border-radius: 25px;
+}
+
+.employee-dropdown-list .options li {
+    height: 50px;
+    padding: 0 13px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.employee-dropdown-list .options li:hover, li.selected {
+    background: rgb(230, 230, 230);
+}
+

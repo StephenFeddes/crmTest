@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 225px;
+    background: rgb(75, 65, 80);
+    transition: all 0.5s ease;
+}
+
+.sidebar.close {
+    width: 50px;
+}
+
+/* General styling for the top 50px of the sidebar, which contains the logo and Urbancom name */
+.sidebar .logo-details{
+    height: 50px;
+    width: 100%;
+    /* Watch a tutorial on flexbox. 
+    It allows items to positioned with 'align-items' and 'justify-content' across axis's */
+    display: flex;
+    align-items: center;
+    background: rgb(50, 50, 80);
+}
+
+.sidebar .logo-details i{
+    height: 50px;
+    min-width: 50px;
+    text-align: center;
+    justify-content: center;
+    line-height: 50px;
+    color: rgb(255, 255, 255);
+    font-size: 35px;
+    pointer-events: auto;
+    cursor: pointer;
+}
+/* Styling for the company name at the top of the sidebar*/
+.sidebar .logo-details .logo-name{
+    font-size: 22px;
+    color: rgb(255, 255, 255);
+    -webkit-text-stroke: 0.25px rgb(255, 192, 247);
+    font-weight: 600;
+    transition: 0.3s ease;
+    transition-delay: 0.1s;
+    user-select: none;
+}
+
+.sidebar.close .logo-details .logo-name {
+    transition-delay: 0s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Creates a section for the sidebar's navigation links and pads the content from the top of the sidebar */
+.sidebar .nav-links {
+    height: 100%;
+    padding-top: 30px 0 150px 0;
+    overflow: auto;
+}
+
+.sidebar .nav-links {
+    overflow: visible;
+}
+
+.sidebar .nav-links::-webkit-scrollbar {
+   display: none;
+}
+
+.sidebar .nav-links li {
+    position: relative;
+    list-style: none;
+    /* How the navigation link color should transition as the user hovers over them */
+    transition: all 0.4s ease;
+}
+
+/* Centers each element (logo, link, open symbol) within its sidebar line and
+separates each element as far apart as they can be using 'space-between' */
+.sidebar .nav-links li .icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar.close .nav-links li .icon-link {
+    display: block;
+}
+
+/* When a sidebar section is hovered over, the section's color should transition to a lighter shade */
+.sidebar .nav-links li:hover {
+    background: rgb(50, 50, 80);
+}
+
+/* Styles the icons in each sidebar section */
+.sidebar .nav-links li i {
+    height: 50px;
+    min-width: 50px;
+    text-align: center;
+    line-height: 50px;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.sidebar .nav-links li i.arrow.showMenu {
+    transform: rotate(-180deg);
+}
+
+.sidebar.close .nav-links i.arrow {
+    display: none;
+}
+
+.sidebar .nav-links li .name-icon-group {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.sidebar .nav-links li .icon-link {
+    cursor: pointer;
+}
+
+.sidebar .nav-links li .link-name {
+    font-size: 18px;
+    font-weight: 400;
+    color: rgb(255, 255, 255);
+    pointer-events: none;
+}
+
+.sidebar.close .nav-links li .name-icon-group .link-name {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar .nav-links li .sub-menu {
+    padding: 6px 6px 14px 80px;
+    margin-top: -10px;
+    background: rgb(50, 50, 80);
+    display: none;
+}
+
+.sidebar.close .nav-links li .sub-menu .link-name {
+    display: none;
+}
+
+.sidebar .nav-links li.showMenu .sub-menu {
+    display: block;
+}
+
+.sidebar .nav-links li .sub-menu a,
+.sidebar .nav-links li .sub-menu button {
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    margin-left: -10px;
+    padding: 5px 0;
+    white-space: nowrap;
+    border: none;
+    opacity: 0.6;
+    transition: all .3s ease;
+    text-decoration: none;
+    display: flex;
+    background-color:rgb(50, 50, 80);
+}
+
+.sidebar .nav-links li .sub-menu.blank a {
+    font-size: 18px;
+    opacity: 1;
+}
+
+.sidebar .nav-links li .sub-menu a:hover,
+.sidebar .nav-links li .sub-menu button:hover
+ {
+    opacity: 1;
+}
+
+.sidebar.close .nav-links li .sub-menu {
+    position: absolute;
+    left: 100%;
+    top: -10px;
+    margin-top: 0;
+    padding: 10px 20px;
+    border-radius: 0 6px 6px 0;
+    transition: all 0.4s ease;
+    opacity: 0;
+    display: block;
+    pointer-events: none;
+    transition: 0s;
+}
+
+.sidebar.close .nav-links li:hover .sub-menu {
+    top: 0px;
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.4s ease;
+}
+
+.sidebar .nav-links li .sub-menu .link-name {
+    font-size: 18px;
+    opacity: 1;
+    display: none;
+}
+
+.sidebar.close .nav-links li .sub-menu .link-name {
+    font-size: 18px;
+    opacity: 1;
+    display: block;
+}
+
+
+
+.sidebar .nav-links li:hover .sub-menu.blank {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
+.sidebar.close ~ .home-section {
+    left: 50px;
+    width: calc(100%-50px);
+}
+
+.home-section .home-content {
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.home-section .home-content .bx-menu {
+    margin: 0 15px;
+}
+
+.home-section .home-content .bx-menu,
+.home-section .home-content .text {
+    color: rgb(50, 50, 80);
+    font-size: 35px;
+}
+
+.home-section .home-content .text {
+    font-size: 26px;
+    font-weight: 600;
+}

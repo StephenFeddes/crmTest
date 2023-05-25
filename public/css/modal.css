@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top:0;
+    height:100%;
+    width:100%;
+    overflow:auto;
+    background-color:rgba(0,0,0,0.25);
+}
+
+h2 {
+    font-weight: 400;
+    color: rgb(50, 50, 50);
+}
+
+.modal-content {
+    overflow: hidden;
+    border-width: 2px;
+    border-style: solid;
+    border-color:rgb(175, 175, 175);
+    border-radius: 5px;
+    background-color:rgb(255, 255, 255);
+    margin:5% auto;
+    width:900px;
+    box-shadow: 0 5px 8px 0 rgba(0,0,0,0.1), 0 7px 20px 0 rgb(0,0,0, 0.1);
+    animation-name:modalopen;
+    animation-duration:.5s;
+}
+
+.modal-header {
+    margin:0;
+    background: rgb(235, 235, 235);
+    padding:2px 2px 2px 20px;
+    color:white;
+    border-bottom: 1px solid rgb(175, 175, 175);
+}
+
+.modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 10px 10px;
+}
+
+.modal-body label {
+    padding: 7px;
+}
+
+.modal-body input {
+    width: 300px;
+}
+
+
+.form-section {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+.modal-footer {
+    padding: 10px;
+    color: white;
+    text-align: center;
+}
+
+.closeBtn {
+    color: rgb(255, 255, 255);
+    float: right;
+    font-size:30px;
+}
+
+.closeBtn:hover, .closeBtn:focus {
+    color:rgb(0,0,0);
+    text-decoration:none;
+    cursor:pointer;
+}
+
+@keyframes modalopen {
+    from{opacity: 0}
+    to{opacity: 1}
+}
