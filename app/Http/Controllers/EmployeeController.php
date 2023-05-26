@@ -38,7 +38,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-
+        // Todo: Verify that username, email, and phone number are all unique
         $validator = Validator::make($request->all(), [
             'firstName'=>'required|max:255',
             'lastName'=>'required|max:255',
@@ -69,7 +69,7 @@ class EmployeeController extends Controller
             $employee->save();
             return response()->json([
                 'status'=>200,
-                'message'=>"Employee Added Successfully"
+                'message'=>"Employee Added"
             ]);
         }
     }
