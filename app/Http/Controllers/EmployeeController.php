@@ -106,6 +106,7 @@ class EmployeeController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    // Todo: make sure the updated employee has a unique phone number and email.
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
