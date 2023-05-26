@@ -38,14 +38,13 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        // Todo: Verify that username, email, and phone number are all unique
         $validator = Validator::make($request->all(), [
             'firstName'=>'required|max:255',
             'lastName'=>'required|max:255',
             'department'=>'required|max:255',
             'email'=>'required|email|max:255',
-            'phone'=>'required|max:255',
-            'username'=>'required|max:255',
+            'phone'=>'required|unique:employee,phone_number|max:255',
+            'username'=>'required|unique:employee,username|max:255',
             'password'=>'required|max:255',
         ]);
 
