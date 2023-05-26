@@ -102,14 +102,6 @@
             <thead>
             <tbody>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td><button type="button" value="" class="editEmployee">Edit</button></td>
-                    <td><button type="button" value="" class="deleteEmployee">Delete</button></td>
                 </tr>
             </tbody>
         </table>

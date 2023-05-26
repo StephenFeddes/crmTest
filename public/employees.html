@@ -2,44 +2,113 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/module.css">
     <title>Document</title>
 </head>
 <body>
+    <div class="add-employee-modal modal">
+        <ul id="addformErrorList"></ul>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="">First Name</label>
+                <input type="text" class="first-name form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Last Name</label>
+                <input type="text" class="last-name form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Department Name</label>
+                <input type="text" class="department form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Email</label>
+                <input type="text" class="email form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Phone</label>
+                <input type="text" class="phone form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Username</label>
+                <input type="text" class="username form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Password</label>
+                <input type="password" class="password form-control">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button">Close</button>
+            <button type="button" class="addEmployee">Add</button>
+        </div>
+    </div>
+
+    <div class="edit-employee-modal modal">
+        <ul id="addformErrorList"></ul>
+        <input type="hidden" id="editEmployeeId">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="">First Name</label>
+                <input type="text" id="editFirstName" class="first-name form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Last Name</label>
+                <input type="text" id="editLastName" class="last-name form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Department Name</label>
+                <input type="text" id="editDepartment" class="department form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Email</label>
+                <input type="text" id="editEmail" class="email form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Phone</label>
+                <input type="text" id="editPhone" class="phone form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Username</label>
+                <input type="text" id="editUsername" class="username form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Password</label>
+                <input type="password" id="editPassword" class="password form-control">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button">Close</button>
+            <button type="button" class="updateEmployee">Update</button>
+        </div>
+    </div>
     <nav>
     </nav>
-
-<<<<<<< HEAD
-    <div class="module">
-        <div class="header">
-            <h2>Employees</h2>
-            <button class="create-employee">Create Employee</button>
-=======
-    <div id="employeeModal" class="modal">
-        <div class="modal-content">
-            <span class="closeBtn"></span>
-            <p>Testing 123</p>
-        </div>
-    </div>
-
-    <div class="module">
-        <div class="header">
-            <h2>Employees</h2>
-            <button id="create-employee">Create Employee</button>
->>>>>>> be82b6f0b6878c6a4687914c8ec7a00914b9f96f
-        </div>
-        <ul class="rows">
-            <ul class="row-header">
-                <li>First Name</li>
-                <li>Last Name</li>
-                <li>Department</li>
-                <li>Email</li>
-                <li>Phone</li>
-                <li class="action">Action</li>
-            </ul>
-        </ul>
-    </div>
+    <table>
+        <thead>
+            <tr class="module-header">
+                <th><h2>Employees</h2><th>
+                <th><button class="addEmployee">Create Employee</button><th>
+            </tr>
+            <tr>
+                <th class="id-header">ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Department</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Action</th>
+            </tr>
+        <thead>
+        <tbody>
+            <tr>
+            </tr>
+        </tbody>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="js/employeeCrud.js"></script>
 </body>
 </html>

@@ -9,15 +9,15 @@ use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
+    // Displays the employee module
     public function index()
     {
         return view('employee.index');
     }
 
-    public function fetchemployee() 
+    // Returns a json file of all  the employees
+    public function fetchemployees() 
     {
         $employees = User::all();
         return response()->json([
@@ -25,17 +25,13 @@ class EmployeeController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Fetches data for the employee creation modal
     public function create()
     {
-        //
+        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Stores a created employee in the database
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -43,11 +39,12 @@ class EmployeeController extends Controller
             'lastName'=>'required|max:255',
             'department'=>'required|max:255',
             'email'=>'required|email|max:255',
-            'phone'=>'required|unique:employee,phone_number|max:255',
-            'username'=>'required|unique:employee,username|max:255',
-            'password'=>'required|max:255',
+            'phone'=>'required|unique:employee,phone_number|max:255', // Checks if the employee's phone number is unique to the employee table
+            'username'=>'required|unique:employee,username|max:255', // Checks if the employee's username is unique to the employee table
+            'password'=>'required|max:255' // Checks to make sure a password was entered
         ]);
 
+        // If the validation fails, then respond with a '400' error and a list of what was invalid
         if ($validator->fails()) 
         {
             return response()->json([
@@ -64,8 +61,10 @@ class EmployeeController extends Controller
             $employee->email_address = $request->input('email');
             $employee->phone_number = $request->input('phone');
             $employee->username = $request->input('username');
-            $employee->password = Hash::make($request->input('password'));
-            $employee->save();
+            $employee->password = Hash::make($request->input('password')); // Hashes the password before storing it in the database so that the true password cannot be viewed in the database
+            $employee->save(); // Creates the employee in the database
+            
+            // Responds back with a success message
             return response()->json([
                 'status'=>200,
                 'message'=>"Employee Added"
@@ -73,17 +72,17 @@ class EmployeeController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // Fetches and returns the selected employee
     public function show(string $id)
     {
-        //
+        $employee = User::find($id);
+        return response()->json([
+            'employee'=>$employee
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
+    // Returns employee data for the updated form
     public function edit(string $id)
     {
         $employee = User::find($id);
@@ -103,19 +102,16 @@ class EmployeeController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    // Todo: make sure the updated employee has a unique phone number and email.
+    // Updates the selected employee
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'firstName'=>'required|max:255',
+            'firstName'=>'required|max:255', // max:255 means that the first name cannot have more than 255 characters in it
             'lastName'=>'required|max:255',
             'department'=>'required|max:255',
             'email'=>'required|email|max:255',
-            'phone'=>'required|max:255',
-            'username'=>'required|max:255'
+            'phone'=>'required|unique:employee,phone_number,'.$id.'|max:255', // Checks if the phone number is unique within the employee table excluding its own record
+            'username'=>'required|unique:employee,username,'.$id.'|max:255', // Checks if the username is unique within the employee table excluding its own record
         ]);
 
 
