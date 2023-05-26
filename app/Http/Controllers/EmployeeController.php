@@ -9,12 +9,15 @@ use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends Controller
 {
-    public function index() 
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
         return view('employee.index');
     }
 
-    public function fetchstudent() 
+    public function fetchemployee() 
     {
         $employees = User::all();
         return response()->json([
@@ -22,8 +25,20 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function store(Request $request) 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+
         $validator = Validator::make($request->all(), [
             'firstName'=>'required|max:255',
             'lastName'=>'required|max:255',
@@ -59,7 +74,19 @@ class EmployeeController extends Controller
         }
     }
 
-    public function edit($id) {
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
         $employee = User::find($id);
         if ($employee)
         {
@@ -77,7 +104,10 @@ class EmployeeController extends Controller
         }
     }
 
-    public function update(Request $request, $id) 
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
             'firstName'=>'required|max:255',
@@ -96,14 +126,11 @@ class EmployeeController extends Controller
                 'errors'=>$validator->messages()
             ]);
         } 
-        else 
-        {
+        else {
+
             $employee = User::find($id);
             
-            if ($employee) 
-            {
-
-
+            if ($employee) {
                 $employee->first_name = $request->input('firstName');
                 $employee->last_name = $request->input('lastName');
                 $employee->department_name = $request->input('department');
@@ -129,7 +156,10 @@ class EmployeeController extends Controller
         }
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
     {
         $student = User::find($id);
         $student->delete();
