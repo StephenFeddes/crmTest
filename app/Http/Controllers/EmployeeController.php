@@ -19,7 +19,7 @@ class EmployeeController extends Controller
     }
 
     // Returns a json file of all  the employees
-    public function fetchemployees() 
+    public function fetchEmployees() 
     {
         $employees = User::all();
         return response()->json([

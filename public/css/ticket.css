@@ -45,7 +45,7 @@ body {
 }
 
 #create-employee-modal {
-    display:none;
+    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -295,7 +295,7 @@ tr:last-child {
     border-bottom-color: var(--grey);
 }
 
-.edit-employee {
+.edit-ticket {
     background-color: var(--blue);
     border: none;
     color: var(--white);
@@ -305,11 +305,11 @@ tr:last-child {
     cursor: pointer;
 }
 
-.edit-employee:hover {
+.edit-ticket:hover {
     background-color: var(--darkBlue);
 }
 
-.deleteEmployee {
+.delete-ticket {
     background-color: var(--red);
     border: none;
     color: var(--white);
@@ -319,6 +319,6 @@ tr:last-child {
     cursor: pointer;
 }
 
-.deleteEmployee:hover {
+.delete-ticket:hover {
     background-color: var(--darkRed);
 }

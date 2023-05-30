@@ -1,7 +1,7 @@
 @extends('layouts.crmMain')
 
 @section('styling')
-<link rel="stylesheet" href="css/employees.css">
+<link rel="stylesheet" href="css/empl.css">
 @endsection
 
 @section('title')

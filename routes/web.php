@@ -25,8 +25,9 @@ Route::post('/login', [AuthController::class, 'login']);
 /* Route::resource provides get, post, put, and delete routes to the employee controller, 
 which is used  with the ajax calls in the 'employeeCrud.js' Javascript file to perform CRUD operations */
 Route::resource('/employees', EmployeeController::class)->middleware('auth');
-Route::get('/fetch-employees', [EmployeeController::class, 'fetchemployees']);
+Route::get('/fetch-employees', [EmployeeController::class, 'fetchEmployees']);
 
 Route::resource('/tickets', TicketController::class)->middleware('auth');
+Route::get('/fetch-tickets', [TicketController::class, 'fetchTickets']);
 
 

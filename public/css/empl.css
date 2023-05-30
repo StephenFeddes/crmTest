@@ -45,7 +45,7 @@ body {
 }
 
 #create-employee-modal {
-    display:none;
+    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -309,7 +309,7 @@ tr:last-child {
     background-color: var(--darkBlue);
 }
 
-.deleteEmployee {
+.delete-employee {
     background-color: var(--red);
     border: none;
     color: var(--white);
@@ -319,7 +319,7 @@ tr:last-child {
     cursor: pointer;
 }
 
-.deleteEmployee:hover {
+.delete-employee:hover {
     background-color: var(--darkRed);
 }
 

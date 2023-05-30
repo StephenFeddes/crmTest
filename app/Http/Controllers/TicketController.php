@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
 {
@@ -13,6 +15,19 @@ class TicketController extends Controller
     {
         return view('tickets.index', [
             'user'=>auth()->user()
+        ]);
+    }
+
+    public function fetchTickets() {
+        $tickets = Ticket::all();
+        $ticketsList = [];
+        foreach ($tickets as $ticket) {
+            $assignedEmployee = DB::select("SELECT id, first_name, last_name, department_name  FROM employee WHERE id = $ticket->assigned_to_id")[0];
+            $ticketsList[] = [$ticket, $assignedEmployee];
+        }
+
+        return response()->json([
+            'tickets'=>$ticketsList
         ]);
     }
 

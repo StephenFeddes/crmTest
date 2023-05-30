@@ -90,7 +90,7 @@ $(document).ready(function () {
                         <td>'+item.phone_number+'</td>\
                         <td>\
                             <button type="button" value="'+item.id+'" class="edit-employee"><i class="uil uil-pen"></i></button>\
-                            <button type="button" value="'+item.id+'" class="deleteEmployee"><i class="uil uil-trash-alt"></i></button>\
+                            <button type="button" value="'+item.id+'" class="delete-employee"><i class="uil uil-trash-alt"></i></button>\
                         </td>\
                     </tr>');
                 });
@@ -111,7 +111,7 @@ $(document).ready(function () {
     }
 
     // Employee deletion
-   $(document).on('click', '.deleteEmployee', async function (e) {
+   $(document).on('click', '.delete-employee', async function (e) {
         e.preventDefault(); // Removes any default button behavior. i.e. form submission, which would cause the page to refresh and ruin the purpose of ajax
 
         // Gets the selected element's (Delete button) id value. The value in the delete buttton is the id of the employee, which was generated in the fetchEmployees function
