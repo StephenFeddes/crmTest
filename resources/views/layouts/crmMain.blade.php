@@ -7,6 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="css/navigbar.css">
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+        <link rel="shortcut icon" type="image/png" href="./images/urbancom.png"/>
         @yield('styling')
         @yield('title')
     </head>
