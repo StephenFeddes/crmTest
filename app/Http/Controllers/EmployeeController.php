@@ -6,10 +6,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use OutOfBoundsException;
 
 class EmployeeController extends Controller
 {
-    
+
+    private $filters = [];
+
     // Displays the employee module
     public function index()
     {
@@ -18,10 +21,26 @@ class EmployeeController extends Controller
         ]);
     }
 
-    // Returns a json file of all  the employees
-    public function fetchEmployees() 
+    public function rowCount()
     {
-        $employees = User::all();
+        return User::all()->count();
+    }
+
+    // Returns a json file of all the employees
+    public function fetchEmployees($pageNum) 
+    {
+        $pageSize = 5;
+        $lowerPageBound = $pageNum * $pageSize;
+        $upperPageBound = $lowerPageBound + $pageSize;
+        $employeeList = User::orderBy('id', 'desc')->get();
+        $employees = [];
+        for ($i = $lowerPageBound; $i < $upperPageBound; $i++) {
+            if (!isset($employeeList[$i])) {
+                break;
+            }
+            $employees[] = $employeeList[$i];
+        }
+
         return response()->json([
             'employees'=>$employees
         ]);

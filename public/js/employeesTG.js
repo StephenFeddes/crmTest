@@ -1,14 +1,57 @@
 // When the page is loaded, this Javascript file will execute
 $(document).ready(function () {
-    
 
     let modalCreate = document.getElementById("create-employee-modal");
     let modalUpdate = document.getElementById("update-employee-modal");
     let modalCreateBtn = document.getElementById("create-employee-btn");
-    let modalAddBtn = document.getElementsByClassName("add-employee")[0];
     let modalCloseBtns= Array.from(document.getElementsByClassName("close-btn"));
     let modalExitBtns = Array.from(document.getElementsByClassName("uil-times"));
-    let updateBtn = document.getElementsByClassName("update-employee")[0];
+
+
+    let visiblePageCounter = document.getElementById("page-counter");
+
+    currentPageNumber = 0;
+    let increasePageBtn = document.getElementById("increase-page");
+    increasePageBtn.addEventListener('click', async()=>{
+        currentPageNumber+=1;
+        totalRows = await getRowCount();
+        lastPageNumber = Math.floor(totalRows/5);
+
+        //todo: Make sure the current page number does not go above the last page number
+
+        fetchEmployees(currentPageNumber);
+        visiblePageCounter.innerHTML = "";
+        visiblePageCounter.innerHTML = currentPageNumber + 1;
+        console.log(visiblePageCounter);
+    });
+
+    let decreasePageBtn = document.getElementById("decrease-page");
+    decreasePageBtn.addEventListener('click', ()=>{
+        if (currentPageNumber > 0) {
+            currentPageNumber-=1;
+        }
+        fetchEmployees(currentPageNumber);
+        visiblePageCounter.innerHTML = "";
+        visiblePageCounter.innerHTML = currentPageNumber + 1;
+    });
+
+    let firstPageBtn = document.getElementById("first-page-num");
+    firstPageBtn.addEventListener('click', ()=>{
+        currentPageNumber = 0;
+        fetchEmployees(currentPageNumber);
+        visiblePageCounter.innerHTML = "";
+        visiblePageCounter.innerHTML = currentPageNumber + 1;
+    });
+
+    let lastPageBtn = document.getElementById("last-page-num");
+    lastPageBtn.addEventListener('click', async ()=>{
+
+        totalRows = await getRowCount();
+        currentPageNumber = Math.floor(totalRows/5);
+        fetchEmployees(currentPageNumber);
+        visiblePageCounter.innerHTML = "";
+        visiblePageCounter.innerHTML = currentPageNumber + 1;
+    });
 
     function closeModal() {
         let errors = Array.from(modalCreate.getElementsByClassName('modal-body')[0].querySelectorAll('i'));
@@ -17,6 +60,7 @@ $(document).ready(function () {
         });
         modalCreate.style.display = 'none';
         modalUpdate.style.display = 'none';
+        visiblePageCounter.innerHtml = "";
         document.getElementsByTagName("body")[0].style.overflow = 'auto';
     }
 
@@ -69,14 +113,34 @@ $(document).ready(function () {
         });
     }
 
+    function getRowCount(pageNum=0)
+    {
+        return new Promise((resolve, reject)=> {
+            $.ajax({
+                type: "GET",
+                url: "./employees-row-count",
+                dataType: "json",
+                success: function (response) {
+                    resolve(response);
+                },
+                error: function(error) {
+                    reject(error);
+                }
+            });
+        });               
+    }
+
     // Makes a get request to the fetch-employees route, which calls the employee controller's fetchemployee function. This returns a json file of the employees
-    function fetchEmployees()
+    function fetchEmployees(pageNum=0)
     {
         $.ajax({
             type: "GET",
-            url: "./fetch-employees",
+            url: "./fetch-employees/"+pageNum,
             dataType: "json",
             success: function (response) {
+
+                numRows = Object.keys(response.employees);
+
                 $('tbody').html(""); // Clears all the previous html inside of the employee table body before the new list of employees is added to the employee table body
 
                 // appends all the employee rows together inside  the employee table body

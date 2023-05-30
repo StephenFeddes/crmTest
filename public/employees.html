@@ -2,120 +2,126 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/module.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="css/em.css">
+    <title>Employees</title>
 </head>
-<body>
-    <div class="add-employee-modal modal">
-        <ul id="addformErrorList"></ul>
-        <div class="modal-body">
-            <div class="form-group">
-                <label for="">First Name</label>
-                <input type="text" class="first-name form-control">
-            </div>
-            <div class="form-group">
-                <label for="">Last Name</label>
-                <input type="text" class="last-name form-control">
-            </div>
-            <div class="form-group">
-                <label for="">Department Name</label>
-                <input type="text" class="department form-control">
-            </div>
-            <div class="form-group">
-                <label for="">Email</label>
-                <input type="text" class="email form-control">
-            </div>
-            <div class="form-group">
-                <label for="">Phone</label>
-                <input type="text" class="phone form-control">
-            </div>
-            <div class="form-group">
-                <label for="">Username</label>
-                <input type="text" class="username form-control">
-            </div>
-            <div class="form-group">
-                <label for="">Password</label>
-                <input type="password" class="password form-control">
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button">Close</button>
-            <button type="button" class="addEmployee">Add</button>
-        </div>
-    </div>
-
-    <div class="edit-employee-modal modal">
-        <ul id="addformErrorList"></ul>
-        <input type="hidden" id="editEmployeeId">
-        <div class="modal-body">
-            <div class="form-group">
-                <label for="">First Name</label>
-                <input type="text" id="editFirstName" class="first-name form-control">
-            </div>
-            <div class="form-group">
-                <label for="">Last Name</label>
-                <input type="text" id="editLastName" class="last-name form-control">
-            </div>
-            <div class="form-group">
-                <label for="">Department Name</label>
-                <input type="text" id="editDepartment" class="department form-control">
-            </div>
-            <div class="form-group">
-                <label for="">Email</label>
-                <input type="text" id="editEmail" class="email form-control">
-            </div>
-            <div class="form-group">
-                <label for="">Phone</label>
-                <input type="text" id="editPhone" class="phone form-control">
-            </div>
-            <div class="form-group">
-                <label for="">Username</label>
-                <input type="text" id="editUsername" class="username form-control">
-            </div>
-            <div class="form-group">
-                <label for="">Password</label>
-                <input type="password" id="editPassword" class="password form-control">
+    <body>
+        <div id="create-employee-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Create Employee</h2>
+                    <i class="uil uil-times"></i>
+                </div>
+                <form autocomplete="off" class="modal-body">
+                    <div class="form-group firstName">
+                        <label for="create-first-name">First Name</label>
+                        <input type="text" id="create-first-name" class="first-name-input form-control">
+                    </div>
+                    <div class="form-group lastName">
+                        <label for="create-last-name">Last Name</label>
+                        <input type="text" id="create-last-name" class="last-name-input form-control">
+                    </div>
+                    <div class="form-group department">
+                        <label for="create-department">Department</label>
+                        <select name="create-department" id="create-department" class="department-input form-control">
+                            <option selected disabled>Choose a department</option>
+                            <option value="support">Support</option>
+                            <option value="helpDesk">Help Desk</option>
+                            <option value="sales">Sales</option>
+                        </select>
+                    </div>
+                    <div class="form-group email">
+                        <label for="create-email">Email</label>
+                        <input type="text" id="create-email" class="email-input form-control">
+                    </div>
+                    <div class="form-group phone">
+                        <label for="create-phone">Phone</label>
+                        <input type="text" id="create-phone" class="phone-input form-control">
+                    </div>
+                    <div class="form-group username">
+                        <label for="create-username">Username</label>
+                        <input type="text" id="create-username" class="username-input form-control">
+                    </div>
+                    <div class="form-group password">
+                        <label for="create-password">Password</label>
+                        <input type="password" id="create-password" class="password-input form-control">
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="add-employee">Add</button>
+                    <button type="button" class="close-btn">Close</button>
+                </div>
             </div>
         </div>
-        <div class="modal-footer">
-            <button type="button">Close</button>
-            <button type="button" class="updateEmployee">Update</button>
+        <div id="update-employee-modal" class="modal">
+            <ul id="updateFormErrorList"></ul>
+            <input type="hidden" id="edit-employee-id">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Update Employee</h2>
+                    <i class="uil uil-times"></i>
+                </div>
+                <form autocomplete="off" class="modal-body">
+                    <div class="form-group firstName">
+                        <label for="editFirstName">First Name</label>
+                        <input type="text" id="editFirstName" class="first-name form-control">
+                    </div>
+                    <div class="form-group lastName">
+                        <label for="editLastName">Last Name</label>
+                        <input type="text" id="editLastName" class="last-name form-control">
+                    </div>
+                    <div class="form-group department">
+                        <label for="editDepartment">Department</label>
+                        <input type="text" id="editDepartment" class="department form-control">
+                    </div>
+                    <div class="form-group email">
+                        <label for="editEmail">Email</label>
+                        <input type="text" id="editEmail" class="email form-control">
+                    </div>
+                    <div class="form-group phone">
+                        <label for="editPhone">Phone</label>
+                        <input type="text" id="editPhone" class="phone form-control">
+                    </div>
+                    <div class="form-group username">
+                        <label for="editUsername">Username</label>
+                        <input type="text" id="editUsername" class="username form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="editPassword">Password</label>
+                        <input type="password" id="editPassword" class="password form-control">
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="update-employee">Update</button>
+                    <button type="button" class="close-btn">Close</button>
+                </div>
+            </div>
         </div>
-    </div>
-    <nav>
-    </nav>
-    <table>
-        <thead>
-            <tr class="module-header">
-                <th><h2>Employees</h2><th>
-                <th><button class="addEmployee">Create Employee</button><th>
-            </tr>
-            <tr class="columns-header">
-                <th class="id-header">ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Department</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th class="action">Action</th>
-            </tr>
-        <thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Stephen</td>
-                <td>Feddes</td>
-                <td>Department</td>
-                <td>Email</td>
-                <td>Phone</td>
-                <td>Action</td>
-            </tr>
-        </tbody>
-    </table>
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-    <script src="js/employeeCrud.js"></script>
-</body>
+        <div class="module">
+            <div class="module-header">
+                <i class="uil uil-users-alt"></i>
+                <h2>Employees<h2>
+                <button type="button" id="create-employee-btn"><i class="uil uil-plus"></i></button>
+                <h2 style="margin-left:100px" id="success-message"></h2>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+        <script src="js/employeesCrud.js"></script>
+    </body>
 </html>

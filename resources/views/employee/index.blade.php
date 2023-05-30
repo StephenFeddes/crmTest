@@ -27,7 +27,12 @@
                 </div>
                 <div class="form-group department">
                     <label for="create-department">Department</label>
-                    <input type="text" id="create-department" class="department-input form-control">
+                    <select name="create-department" id="create-department" class="department-input form-control">
+                        <option selected disabled>Choose a department</option>
+                        <option value="Support">Support</option>
+                        <option value="Help Desk">Help Desk</option>
+                        <option value="Sales">Sales</option>
+                    </select>
                 </div>
                 <div class="form-group email">
                     <label for="create-email">Email</label>
@@ -72,7 +77,12 @@
                 </div>
                 <div class="form-group department">
                     <label for="editDepartment">Department</label>
-                    <input type="text" id="editDepartment" class="department form-control">
+                    <select name="editDepartment" id="editDepartment" class="department form-control">
+                        <option selected disabled>Choose a department</option>
+                        <option value="Support">Support</option>
+                        <option value="Help Desk">Help Desk</option>
+                        <option value="Sales">Sales</option>
+                    </select>
                 </div>
                 <div class="form-group email">
                     <label for="editEmail">Email</label>
@@ -103,6 +113,13 @@
             <h2>Employees<h2>
             <button type="button" id="create-employee-btn"><i class="uil uil-plus"></i></button>
             <h2 style="margin-left:100px" id="success-message"></h2>
+            <div class="paginate">
+                <button id="first-page-num">First</button>
+                <button id="decrease-page">Previous</button>
+                <div id="page-counter">1</div>
+                <button id="increase-page">Next</button>
+                <button id="last-page-num">Last</button>
+            </div>
         </div>
         <table>
             <thead>
@@ -120,6 +137,6 @@
         </table>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-    <script src="js/employeesCrud.js"></script>
+    <script src="js/employeesTG.js"></script>
 </body>
 @endsection
