@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    list-style-type:none;
+    border-spacing: 0px;
+}
+
+:root {
+    --white: rgb(250, 250, 250);
+    --light-grey: rgb(240, 240, 240);
+    --grey: rgb(215, 215, 215);
+    --black: rgb(25,25,25);
+    --mediumBlack: rgb(75,75,75);
+    --green: rgb(0, 165, 115);
+    --darkGreen: rgb(0, 125, 75);
+    --blue: rgb(50, 125, 250);
+    --darkBlue: rgb(35, 100, 225);
+    --red: rgb(250, 50, 50);
+    --darkRed: rgb(200, 40, 40);
+    --lightPurple: rgb(200, 200, 225);
+}
+
+body {
+    background: var(--lightPurple);
+}
+
+nav {
+    display: flex;
+    background-color: var(--white);
+    height: 60px;
+    align-items: flex-end;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+nav .uil-apps {
+    line-height: 1.3;
+    padding-top: 15px;
+    font-size: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: var(--black);
+}
+
+nav .uil-apps:hover {
+    color: var(--mediumBlack);
+}
+
+nav .nav-btn p {
+    padding-left: 15px;
+    padding-right: 15px;
+    color: var(--mediumBlack);
+    font-weight: 500;
+    font-size: 18px;
+}
+
+#signout {
+    margin-left: auto;
+    display:flex;
+    padding-right: 10px;
+}
+
+#signout p {
+    pointer-events: none;
+    font-weight: 400;
+    padding: 5px;
+}
+
+
+#signout i {
+    text-decoration: none;
+    font-size: 40px;
+    color: var(--black);
+}
+
+#signout i:hover {
+    color: var(--mediumBlack);
+}
+
+nav .nav-btn:hover p {
+    color: var(--black);
+
+}
+
+nav .nav-btn {
+    padding-bottom: 10px;
+    text-decoration: none;
+    transition: .25s;
+}
+
+.nav-btn:hover {
+    background-color: var(--light-grey);
+}
+
+.nav-btn:hover .rectangle {
+    background-color: var(--darkBlue);
+}
+
+.rectangle {
+    transition: .25s;
+    margin-bottom: 10px;
+    height: 5px;
+    background-color: var(--white);
+}
+
+.nav-bottom {
+    background-color: var(--darkBlue);
+    margin-bottom: 0px;
+}

@@ -1,0 +1,324 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    list-style-type:none;
+    border-spacing: 0px;
+}
+
+:root {
+    --white: rgb(250, 250, 250);
+    --light-grey: rgb(240, 240, 240);
+    --grey: rgb(215, 215, 215);
+    --black: rgb(25,25,25);
+    --mediumBlack: rgb(75,75,75);
+    --green: rgb(0, 165, 115);
+    --darkGreen: rgb(0, 125, 75);
+    --blue: rgb(50, 125, 250);
+    --darkBlue: rgb(35, 100, 225);
+    --red: rgb(250, 50, 50);
+    --darkRed: rgb(200, 40, 40);
+    --lightPurple: rgb(200, 200, 225);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--lightPurple);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#update-employee-modal {
+    display:none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.25);
+    overflow-y: initial
+}
+
+#create-employee-modal {
+    display:none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.25);
+    overflow-y: initial
+}
+
+.modal-content {
+    background-color: var(--light-grey);
+    margin: 2% auto;
+    padding: 0px;
+    width: 50%;
+    border-style: solid;
+    border-color: var(--grey);
+    border-radius: 10px;
+    border-width: 2px;
+    max-height: calc(100vh);
+    overflow-y: auto;
+    animation-name: modalopen;
+    animation-duration: .25s;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.modal-header h2 {
+    color: var(--black);
+    pointer-events: none;
+}
+
+.modal-header i {
+    font-size: 30px;
+    line-height: 0;
+    color: var(--black);
+    cursor: pointer
+}
+
+.modal-header i:hover {
+    color: var(--mediumBlack);
+}
+
+.modal-body {
+    border-style: solid;
+    border-color: var(--grey);
+    border-left: none;
+    border-right: none;
+    border-width: 2px;
+    padding: 20px;
+}
+
+.modal-body .form-group {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+    padding-right: 25%;
+}
+
+.modal-body .form-group label {
+    margin: 5px;
+    font-size: 18px;
+}
+
+.modal-body .form-control {
+    width: 67%;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: var(--grey);
+    padding-left: 10px;
+}
+
+.modal-body .form-control:focus {
+    outline-color: var(--blue);
+}
+
+.modal-body i {
+    color: var(--red);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
+.modal-footer button {
+    margin: 0px 15px 0px 15px;
+    width: 100px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    color: var(--white);
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.modal-footer .add-employee {
+    background-color: var(--green);
+}
+
+.modal-footer .add-employee:hover {
+    background-color: var(--darkGreen);
+}
+
+.update-employee {
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+.update-employee:hover {
+    background-color: var(--darkBlue);
+}
+
+.modal-footer .close-btn {
+    background-color: var(--red);
+}
+
+.modal-footer .close-btn:hover {
+    background-color: var(--darkRed);
+}
+
+
+@keyframes modalopen {
+    from {opacity: 0}
+    to {opacity: 1}
+}
+
+#success-message {
+    padding-left:5px;
+    padding-right:5px;
+    border-radius: 5px;
+    color: var(--white);
+    font-weight: 500
+}
+
+.module .module-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.module-header .uil-ticket {
+    color: var(--black);
+    font-size: 40px;
+    width: 40px;
+}
+
+.module-header h2 {
+    color: var(--black);
+    pointer-events: none;
+}
+
+.module-header #create-employee-btn {
+    background-color: var(--green);
+    border: none;
+    color: var(--white);
+    font-size: 25px;
+    width: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    pointer-events: auto;
+    margin-left: 10px;
+}
+
+.module-header #create-employee-btn:hover {
+    background-color: var(--darkGreen);
+}
+
+.module {
+    margin: 10px;
+    border-style: solid;
+    border-color: var(--grey);
+    border-radius: 10px;
+    background-color: var(--light-grey);
+    flex: 1;
+    overflow-x: auto;
+}
+
+.table-header {
+    height: 50px;
+}
+
+thead th {
+    background-color: var(--white);
+    border-style: solid;
+    border-color: var(--grey);
+    border-bottom: none;
+    border-left: none;
+    border-width: 2px;
+    text-align: left;
+    padding: 3px 0px 3px 10px;
+    color: var(--black);
+    font-weight: 600;
+    pointer-events: none;
+}
+
+thead th:first-child {
+    width: 5%;
+}
+
+thead th:not(:first-child):not(:last-child) {
+    width: 10%
+}
+
+thead th:last-child {
+    width: 1%;
+    border-right: none;
+    padding: 0px;
+    text-align: center;
+}
+
+
+td {
+    border-color: var(--grey);
+    border-width: 2px;
+    border-style: solid;
+    border-left: none;
+    border-bottom: none;
+    padding-left: 8px;
+}
+
+tbody tr {
+    background-color: var(--white);
+    transition: .3s;
+}
+
+tbody tr:hover {
+    background-color: var(--grey);
+}
+
+td:last-child {
+    border-right: none;
+    line-height: .1;
+}
+
+tr:last-child {
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: var(--grey);
+}
+
+.edit-employee {
+    background-color: var(--blue);
+    border: none;
+    color: var(--white);
+    font-size: 20px;
+    width: 23px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-employee:hover {
+    background-color: var(--darkBlue);
+}
+
+.deleteEmployee {
+    background-color: var(--red);
+    border: none;
+    color: var(--white);
+    font-size: 20px;
+    width: 23px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.deleteEmployee:hover {
+    background-color: var(--darkRed);
+}

@@ -1,5 +1,55 @@
 // When the page is loaded, this Javascript file will execute
 $(document).ready(function () {
+    
+
+    let modalCreate = document.getElementById("create-employee-modal");
+    let modalUpdate = document.getElementById("update-employee-modal");
+    let modalCreateBtn = document.getElementById("create-employee-btn");
+    let modalAddBtn = document.getElementsByClassName("add-employee")[0];
+    let modalCloseBtns= Array.from(document.getElementsByClassName("close-btn"));
+    let modalExitBtns = Array.from(document.getElementsByClassName("uil-times"));
+    let updateBtn = document.getElementsByClassName("update-employee")[0];
+
+    function closeModal() {
+        let errors = Array.from(modalCreate.getElementsByClassName('modal-body')[0].querySelectorAll('i'));
+        errors.forEach(error=>{
+            error.remove();
+        });
+        modalCreate.style.display = 'none';
+        modalUpdate.style.display = 'none';
+        document.getElementsByTagName("body")[0].style.overflow = 'auto';
+    }
+
+
+    modalCloseBtns.forEach(closeBtn => {
+        closeBtn.addEventListener('click', closeModal);
+    });
+
+    modalExitBtns.forEach(exitBtn => {
+        exitBtn.addEventListener('click', closeModal);
+    });
+
+    // Open employee creation modal
+    modalCreateBtn.addEventListener('click', ()=>{
+        let errors = Array.from(modalCreate.getElementsByClassName('modal-body')[0].querySelectorAll('i'));
+        errors.forEach(error=>{
+            error.remove();
+        });
+        let modalCreateInputs = Array.from(document.getElementById("create-employee-modal").getElementsByTagName("input"));
+        modalCreateInputs.forEach(input => {
+            input.value="";
+        });
+        modalCreate.style.display = 'block';
+        document.getElementsByTagName("body")[0].style.overflow = 'hidden';
+    });
+  
+    window.addEventListener('mousedown', (e)=>{
+        if (e.target==modalCreate || e.target==modalUpdate) {
+            modalCreate.style.display="none";
+            modalUpdate.style.display="none";
+            document.getElementsByTagName("body")[0].style.overflow = 'auto';
+        }
+    })
 
     fetchEmployees(); // Fetches all the employees to be initially displayed in the employee table
 
@@ -33,28 +83,41 @@ $(document).ready(function () {
                 $.each(response.employees, function (key, item) {
                     $('tbody').append(
                     '<tr>\
-                    <td>'+item.id+'</td>\
-                    <td>'+item.first_name+'</td>\
-                    <td>'+item.last_name+'</td>\
-                    <td>'+item.department_name+'</td>\
-                    <td>'+item.email_address+'</td>\
-                    <td>'+item.phone_number+'</td>\
-                    <td><button type="button" value="'+item.id+'" class="editEmployee">Edit</button></td>\
-                    <td><button type="button" value="'+item.id+'" class="deleteEmployee">Delete</button></td>\
+                        <td>'+item.id+'</td>\
+                        <td>'+item.first_name+' '+item.last_name+'</td>\
+                        <td>'+item.department_name+'</td>\
+                        <td>'+item.email_address+'</td>\
+                        <td>'+item.phone_number+'</td>\
+                        <td>\
+                            <button type="button" value="'+item.id+'" class="edit-employee"><i class="uil uil-pen"></i></button>\
+                            <button type="button" value="'+item.id+'" class="deleteEmployee"><i class="uil uil-trash-alt"></i></button>\
+                        </td>\
                     </tr>');
+                });
+                let editBtns = Array.from(document.getElementsByClassName("edit-employee"));
+
+                editBtns.forEach(editBtn => {
+                editBtn.addEventListener('click', () =>{
+                    let errors = Array.from(modalCreate.getElementsByClassName('modal-body')[0].querySelectorAll('i'));
+                    errors.forEach(error=>{
+                        error.remove();
+                    });
+                    document.getElementById("update-employee-modal").style.display = 'block';
+                    document.getElementsByTagName("body")[0].style.overflow = 'hidden';
+                    });
                 });
             }
         });
     }
 
-    // When the delete button, which has the class 'deleteEmployee' is clicked, 
+    // Employee deletion
    $(document).on('click', '.deleteEmployee', async function (e) {
         e.preventDefault(); // Removes any default button behavior. i.e. form submission, which would cause the page to refresh and ruin the purpose of ajax
 
         // Gets the selected element's (Delete button) id value. The value in the delete buttton is the id of the employee, which was generated in the fetchEmployees function
         let employeeId = $(this).val();
 
-        let employee = await showEmployee(employeeId); // Asynchronously retrives the employee so the user can see who they are deleting
+        let employee = await showEmployee(employeeId); // Asynchronously retrieves the employee so the user can see who they are deleting
 
         confirmation = confirm(`Are you sure you want to remove ${employee.first_name} ${employee.last_name}?`); // Prompts the user to confirm that they want to delete the selected employee
         
@@ -79,11 +142,16 @@ $(document).ready(function () {
     });
 
     // Updates the changed employee's fields
-    $(document).on('click', '.updateEmployee', function (e) {
+    $(document).on('click', '.update-employee', function (e) {
         e.preventDefault();
+
+        let errors = Array.from(modalUpdate.getElementsByClassName('modal-body')[0].querySelectorAll('i'));
+        errors.forEach(error=>{
+            error.remove();
+        });
     
-        let employeeId = $('#editEmployeeId').val(); //Retrieves the employee id value from the update button associated with that employee record
-        
+        let employeeId = $('#edit-employee-id').val(); //Retrieves the employee id value from the update button associated with that employee record
+
         // Contains the information about this employee that was selected for updating
         let employeeData = {
             'firstName': $('#editFirstName').val(),
@@ -95,13 +163,11 @@ $(document).ready(function () {
             'password': $('#editPassword').val()
         }
 
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
 
         // Makes a PUT request to update the employee in the database
         $.ajax({
@@ -113,34 +179,41 @@ $(document).ready(function () {
                 if (response.status == 400) 
                 {
                     // If the updated employee has invalid fields, return error message
-                    $('#updateformErrorList').html("");
+                    $('#updateFormErrorList').html("");
+                    // $.each(response.errors, function (key, errorValues) {
+                    //     $('#updateFormErrorList').append('<li>'+errorValues+'</li>');
+                    // });
+
                     $.each(response.errors, function (key, errorValues) {
-                        $('#updateformErrorList').append('<li>'+errorValues+'</li>');
+                        modalUpdate.getElementsByClassName(key)[0].insertAdjacentHTML('beforebegin', '<i>'+errorValues+'</i>');
                     });
-                    $('.updateEmployee').text("Update");
                 } 
                 else if (response.status == 404) 
                 {
-                    /* If the employee no longer exists in the database by the time the update occured, there will be a 404 error.
-                        The user will be informed of this. */
+                    /* If the employee no longer exists in the database by the time the update occured, 
+                    there will be a 404 error. The user will be informed of this. */
                     $('#updateformErrorList').html("");
                     $('#success-message').text(response.message);
-                    $('.updateEmployee').text("Update");
                 } 
                 else {
-                    // If the update happened successfully, redisplay the employees in the table and inform the user the update was successful
+                    /* If the update happened successfully, redisplay the employees 
+                    in the table and inform the user the update was successful*/
+                    $("#success-message").fadeIn();
                     $('#updateformErrorList').html("");
                     $('#success-message').html("");
+                    document.getElementById('success-message').style.backgroundColor="rgba(50,125,250,0.5)"
                     $('#success-message').text(response.message);
-                    $('.updateEmployee').text("Update");
+                    $("#success-message").fadeOut(2000, "swing");
                     fetchEmployees();
+                    modalUpdate.style.display = 'none';
+                    document.getElementsByTagName("body")[0].style.overflow = 'auto';
                 }
             }
         });
     });
 
     // Retrives the information about the employee that is to be edited and displays it in the update form
-    $(document).on('click', '.editEmployee', function (e) {
+    $(document).on('click', '.edit-employee', function (e) {
         e.preventDefault();
 
         let employeeId = $(this).val();
@@ -153,9 +226,11 @@ $(document).ready(function () {
                     // If the employee no longer exists, inform the user
                     $('#success-message').html("");
                     $('#success-message').text(response.message);
+                    document.getElementById('success-message').style.backgroundColor="rgba(250,50,50,0.5)"
+                    
                 } else {
                     // Adds each of selected employee's attributes to the appropriate input box of the update form
-                    $('#editEmployeeId').val(response.employee.id);
+                    $('#edit-employee-id').val(response.employee.id);
                     $('#editFirstName').val(response.employee.first_name);
                     $('#editLastName').val(response.employee.last_name);
                     $('#editDepartment').val(response.employee.department_name);
@@ -169,18 +244,23 @@ $(document).ready(function () {
     });
 
 
-    $(document).on('click', '.addEmployee', function (e) {
+    $(document).on('click', '.add-employee', function (e) {
         e.preventDefault();
 
+        let errors = Array.from(modalCreate.getElementsByClassName('modal-body')[0].querySelectorAll('i'));
+        errors.forEach(error=>{
+            error.remove();
+        });
+
         // Contains the value for each employee attribute that was filled out on the employee creation form
-        var employeeData = {
-            'firstName':$('.first-name').val(),
-            'lastName':$('.last-name').val(),
-            'department':$('.department').val(),
-            'email':$('.email').val(),
-            'phone':$('.phone').val(),
-            'username':$('.username').val(),
-            'password':$('.password').val()
+        let employeeData = {
+            'firstName':$('.first-name-input').val(),
+            'lastName':$('.last-name-input').val(),
+            'department':$('.department-input').val(),
+            'email':$('.email-input').val(),
+            'phone':$('.phone-input').val(),
+            'username':$('.username-input').val(),
+            'password':$('.password-input').val()
         }
 
         $.ajaxSetup({
@@ -199,18 +279,22 @@ $(document).ready(function () {
             {
                 if (response.status==400) 
                 {
-                    // If the user entered invalid input, the server will respond with the errors, i.e. invalid email address 
-                    $('#addformErrorList').html("");
+                    // If the user entered invalid input, the server will respond with the errors, i.e. invalid email address
+
                     $.each(response.errors, function (key, errorValues) {
-                        $('#addformErrorList').append('<li>'+errorValues+'</li>');
+                        document.getElementsByClassName(key)[0].insertAdjacentHTML('beforebegin', '<i>'+errorValues+'</i>');
                     });
                 }
                 else
                 {
                     // if the employee was succesfully added, refresh the employee list and display a success message.
-                    $('#addformErrorList').html("");
+                    $("#success-message").fadeIn();
                     $('#success-message').text(response.message);
+                    document.getElementById('success-message').style.backgroundColor="rgba(0,165,115,0.5)";
+                    $("#success-message").fadeOut(2000, "swing");
                     fetchEmployees();
+                    modalCreate.style.display = 'none';
+                    document.getElementsByTagName("body")[0].style.overflow = 'auto';
                 }
             }
         });

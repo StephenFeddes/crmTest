@@ -1,11 +1,11 @@
 @extends('layouts.crmMain')
 
 @section('styling')
-<link rel="stylesheet" href="css/employees.css">
+<link rel="stylesheet" href="css/tickets.css">
 @endsection
 
 @section('title')
-<title>Employees</title>
+<title>Tickets</title>
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
     <div id="create-employee-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Create Employee</h2>
+                <h2>Create Ticket</h2>
                 <i class="uil uil-times"></i>
             </div>
             <form autocomplete="off" class="modal-body">
@@ -99,8 +99,8 @@
     </div>
     <div class="module">
         <div class="module-header">
-            <i class="uil uil-users-alt"></i>
-            <h2>Employees<h2>
+            <i class="uil uil-ticket"></i>
+            <h2>Tickets<h2>
             <button type="button" id="create-employee-btn"><i class="uil uil-plus"></i></button>
             <h2 style="margin-left:100px" id="success-message"></h2>
         </div>
@@ -108,10 +108,11 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Name</th>
-                    <th>Department</th>
-                    <th>Email</th>
-                    <th>Phone</th>
+                    <th>Title</th>
+                    <th>Assigned To</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                    <th>Created</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -120,6 +121,5 @@
         </table>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-    <script src="js/employeesCrud.js"></script>
 </body>
 @endsection

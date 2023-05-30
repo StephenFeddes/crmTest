@@ -1,12 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+@extends('layouts.crmMain')
+
+@section('styling')
+<link rel="stylesheet" href="css/employee.css">
+@endsection
+
+@section('title')
+<title>Employees</title>
+@endsection
+
+@section('content')
 <body>
-    Welcome {{ $user->first_name }}
+    
 </body>
-</html>
+@endsection

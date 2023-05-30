@@ -11,7 +11,7 @@ class AuthController extends Controller
         if(auth()->user()) {
             return redirect('/dashboard');
         }
-        return view('welcome');
+        return view('login');
     }
 
     public function login()

@@ -13,7 +13,9 @@ class EmployeeController extends Controller
     // Displays the employee module
     public function index()
     {
-        return view('employee.index');
+        return view('employee.index', [
+            'user'=>auth()->user()
+        ]);
     }
 
     // Returns a json file of all  the employees
@@ -139,7 +141,7 @@ class EmployeeController extends Controller
                 $employee->update();
                 return response()->json([
                     'status'=>200,
-                    'message'=>"Employee Updated Successfully"
+                    'message'=>"Employee Updated"
                 ]);
             }
             else

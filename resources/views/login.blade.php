@@ -10,7 +10,7 @@
     <body>
         <div class="login-form">
             <div class="urbancom-logo"><img src="./images/urbancom.png" alt="Urbancom logo"></div>
-            <form action="{{ url('login')}}", method='POST'>
+            <form autocomplete="off" action="{{ url('login')}}", method='POST'>
                 @if ($errors->any())
                 <div>
                     <ul>
