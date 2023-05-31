@@ -1,7 +1,7 @@
 @extends('layouts.crmMain')
 
 @section('styling')
-<link rel="stylesheet" href="css/empl.css">
+<link rel="stylesheet" href="css/employ.css">
 @endsection
 
 @section('title')
@@ -115,9 +115,9 @@
             <h2 style="margin-left:100px" id="success-message"></h2>
             <div class="paginate">
                 <button id="first-page-num">First</button>
-                <button id="decrease-page">Previous</button>
+                <button id="decrease-page"><i class="uil uil-angle-left"></i></button>
                 <div id="page-counter">1</div>
-                <button id="increase-page">Next</button>
+                <button id="increase-page"><i class="uil uil-angle-right"></i></button>
                 <button id="last-page-num">Last</button>
             </div>
         </div>
@@ -137,6 +137,6 @@
         </table>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-    <script src="js/employeesTG.js"></script>
+    <script src="js/employeeCruD.js"></script>
 </body>
 @endsection

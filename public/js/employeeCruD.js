@@ -7,32 +7,45 @@ $(document).ready(function () {
     let modalCloseBtns= Array.from(document.getElementsByClassName("close-btn"));
     let modalExitBtns = Array.from(document.getElementsByClassName("uil-times"));
 
+    // Todo: do not let the user decrease or increase the page count if it goes beyond the bounds.
+
 
     let visiblePageCounter = document.getElementById("page-counter");
 
     currentPageNumber = 0;
     let increasePageBtn = document.getElementById("increase-page");
     increasePageBtn.addEventListener('click', async()=>{
-        currentPageNumber+=1;
         totalRows = await getRowCount();
         lastPageNumber = Math.floor(totalRows/5);
-
-        //todo: Make sure the current page number does not go above the last page number
-
-        fetchEmployees(currentPageNumber);
-        visiblePageCounter.innerHTML = "";
-        visiblePageCounter.innerHTML = currentPageNumber + 1;
-        console.log(visiblePageCounter);
+        if (currentPageNumber < lastPageNumber) {
+            currentPageNumber+=1;
+            increasePageBtn.style.display = 'block';
+            fetchEmployees(currentPageNumber);
+            visiblePageCounter.innerHTML = "";
+            visiblePageCounter.innerHTML = currentPageNumber + 1;
+        } 
+        
+        if (currentPageNumber == lastPageNumber) {
+            increasePageBtn.style.display = 'none';
+        }
+        decreasePageBtn.style.display = 'block';
     });
 
     let decreasePageBtn = document.getElementById("decrease-page");
     decreasePageBtn.addEventListener('click', ()=>{
         if (currentPageNumber > 0) {
             currentPageNumber-=1;
+            decreasePageBtn.style.display = 'block';
         }
+
+        if (currentPageNumber == 0) {
+            decreasePageBtn.style.display = 'none';
+        }
+
         fetchEmployees(currentPageNumber);
         visiblePageCounter.innerHTML = "";
         visiblePageCounter.innerHTML = currentPageNumber + 1;
+        increasePageBtn.style.display = 'block';
     });
 
     let firstPageBtn = document.getElementById("first-page-num");
@@ -41,6 +54,8 @@ $(document).ready(function () {
         fetchEmployees(currentPageNumber);
         visiblePageCounter.innerHTML = "";
         visiblePageCounter.innerHTML = currentPageNumber + 1;
+        decreasePageBtn.style.display = 'none';
+        increasePageBtn.style.display = 'block';
     });
 
     let lastPageBtn = document.getElementById("last-page-num");
@@ -51,6 +66,8 @@ $(document).ready(function () {
         fetchEmployees(currentPageNumber);
         visiblePageCounter.innerHTML = "";
         visiblePageCounter.innerHTML = currentPageNumber + 1;
+        decreasePageBtn.style.display = 'block';
+        increasePageBtn.style.display = 'none';
     });
 
     function closeModal() {

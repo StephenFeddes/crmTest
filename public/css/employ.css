@@ -21,6 +21,7 @@
     --red: rgb(250, 50, 50);
     --darkRed: rgb(200, 40, 40);
     --lightPurple: rgb(200, 200, 225);
+    --veryLightPurple: rgb(225, 225, 250);
 }
 
 body {
@@ -220,6 +221,34 @@ body {
 
 .module-header #create-employee-btn:hover {
     background-color: var(--darkGreen);
+}
+
+.paginate {
+    display: flex;
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+#first-page-num, #decrease-page, #increase-page, #last-page-num {
+    background-color: var(--lightPurple);
+    border: none;
+    color: var(--black);
+    border-radius: 5px;
+    cursor: pointer;
+    pointer-events: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+#first-page-num:hover, #decrease-page:hover, #increase-page:hover, #last-page-num:hover {
+    background-color: var(--veryLightPurple);
+}
+
+#page-counter {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .module {
